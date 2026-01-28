@@ -1,0 +1,31 @@
+﻿@model BookWeb.Data.NhaXuatBan
+
+@{
+    ViewData["Title"] = "Chi tiết nhà xuất bản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container mt-4">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light text-center">
+            <tr>
+                <th class="text-center">Mã NXB</th>
+                <th class="text-center">Tên NXB</th>
+                <th class="text-center">Thuộc mảng</th>
+                <th class="text-center" style="width: 200px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>@Model.MaNhaXuatBan</td>
+                <td>@Model.TenNhaXuatBan</td>
+                <td>@Model.ThuocMang</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Model.MaNhaXuatBan" class="btn btn-warning">Chỉnh sửa</a>
+                    <a asp-action="Index" class="btn btn-success">Quay lại</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

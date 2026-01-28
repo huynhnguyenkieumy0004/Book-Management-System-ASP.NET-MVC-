@@ -1,0 +1,93 @@
+﻿@model List<BookWeb.Data.ChiTietGio>
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">Giỏ hàng</li>
+            </ol>
+        </div>
+
+        <div class="table-responsive cart_info">
+            @if (!Model.Any())
+            {
+                <p>Giỏ hàng của bạn đang trống.</p>
+            }
+            else
+            {
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Hình ảnh</td>
+                            <td class="description">Mô tả</td>
+                            <td class="price">Giá tiền</td>
+                            <td class="quantity">Số lượng</td>
+                            <td class="total">Tổng tiền</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="cart_product">
+                                    <a href="@Url.Action("Details", "SanPham", new { id = item.MaSanPham })">
+                                        <img src="~/images/home/@(item.MaSanPhamNavigation?.DuongDan ?? "default.png")" alt="@item.MaSanPhamNavigation?.TenSanPham" style="max-width: 80px;" />
+                                    </a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4>
+                                        <a href="@Url.Action("Details", "SanPham", new { id = item.MaSanPham })">
+                                            @item.MaSanPhamNavigation?.TenSanPham
+                                        </a>
+                                    </h4>
+                                    <p>ID: @item.MaSanPham</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@String.Format("{0:N0} VNĐ", item.Gia - item.GiamGia)</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button" style="display: flex; align-items: center;">
+                                        <a href="javascript:void(0)" class="cart_quantity_down"
+                                           onclick="updateQuantity('@item.MaSanPham', 'decrease')"
+                                           style="padding: 4px 10px; text-decoration: none; border: 1px solid #ccc; border-radius: 3px; margin-left: 5px; user-select: none;">-</a>
+                                        
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@item.SoLuong"
+                                               autocomplete="off" size="2" readonly
+                                               style="text-align: center; width: 40px; border: 1px solid #ccc; border-radius: 3px; padding: 4px;" />
+
+                                        <a href="javascript:void(0)" class="cart_quantity_up"
+                                           onclick="updateQuantity('@item.MaSanPham', 'increase')"
+                                           style="padding: 4px 10px; text-decoration: none; border: 1px solid #ccc; border-radius: 3px; margin-right: 5px; user-select: none;">+</a>
+                                        
+                                    </div>
+                                </td>
+
+                                <script>
+                                    function updateQuantity(id, action) {
+                                      fetch(`/GioHang/${action}?id=${id}`, { method: 'POST' })
+                                        .then(() => location.reload());
+                                    }
+                                </script>
+
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@String.Format("{0:N0} VNĐ", (item.Gia - item.GiamGia) * item.SoLuong)</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <form method="post" asp-action="Remove" asp-route-id="@item.MaSanPham" onsubmit="return confirm('Bạn có chắc muốn xóa không?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-action="Clear" class="btn btn-warning">Xóa hết giỏ hàng</a>
+                <a asp-controller="DonHang" asp-action="Checkout" class="btn btn-success">Tiến hành thanh toán</a>
+
+            }
+        </div>
+    </div>
+</section><!--/#cart_items-->

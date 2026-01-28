@@ -1,0 +1,43 @@
+﻿@model BookWeb.Data.DonHang
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+}
+
+<h2>@ViewData["Title"] - Mã đơn: @Model.MaDon</h2>
+
+<p><strong>Người nhận:</strong> @Model.TenNguoiDung</p>
+<p><strong>Điện thoại:</strong> @Model.DienThoai</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Địa chỉ:</strong> @Model.DiaChi, @Model.ThanhPho, @Model.QuocGia</p>
+<p><strong>Ngày tạo:</strong> @Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th>Phương thức thanh toán</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ChiTietDons)
+        {
+            <tr>
+                <td>@item.MaSanPhamNavigation.TenSanPham</td>
+                <td>@item.Gia.ToString("N0") VND</td>
+                <td>@item.SoLuong</td>
+                <td>@($"{item.Gia * item.SoLuong:N0} VND")</td>
+                <td>COD</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <strong>Tổng cộng:</strong>
+    @($"{Model.ChiTietDons.Sum(x => x.Gia * x.SoLuong):N0} VND")
+</p>
+

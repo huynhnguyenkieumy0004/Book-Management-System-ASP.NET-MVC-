@@ -1,0 +1,36 @@
+﻿@model BookWeb.Data.NhaXuatBan
+
+@{
+    ViewData["Title"] = "Thêm nhà xuất bản";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="MaNhaXuatBan"></label>
+        <input asp-for="MaNhaXuatBan" class="form-control" />
+        <span asp-validation-for="MaNhaXuatBan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TenNhaXuatBan"></label>
+        <input asp-for="TenNhaXuatBan" class="form-control" />
+        <span asp-validation-for="TenNhaXuatBan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ThuocMang"></label>
+        <input asp-for="ThuocMang" class="form-control" />
+        <span asp-validation-for="ThuocMang" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+    <a asp-action="Index" class="btn btn-danger">Quay lại</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

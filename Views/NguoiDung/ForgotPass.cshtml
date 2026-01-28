@@ -1,0 +1,33 @@
+﻿@model BookWeb.Data.NguoiDung
+@{
+    ViewData["Title"] = "Quên mật khẩu";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-1">
+                <div class="signup-form">
+                    <h2>Quên mật khẩu</h2>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <form asp-action="ForgotPass" asp-controller="NguoiDung" method="post">
+                        <div class="form-group">
+                            <label>Tên đăng nhập</label>
+                            <input asp-for="TenDangNhap" placeholder="Nhập tên đăng nhập để đặt lại mật khẩu" class="form-control" />
+                            <span asp-validation-for="TenDangNhap" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

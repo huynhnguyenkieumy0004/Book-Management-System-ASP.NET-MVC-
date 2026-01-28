@@ -1,0 +1,35 @@
+﻿@model BookWeb.Data.DanhMucSanPham
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-danger mb-4">@ViewData["Title"]</h2>
+
+    <h5 class="text-danger text-center mb-4">Bạn có chắc chắn muốn xóa danh mục này?</h5>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light text-center">
+            <tr>
+                <th class="text-center">Mã danh mục</th>
+                <th class="text-center">Tên danh mục</th>
+                <th class="text-center">Mô tả</th>
+                <th class="text-center" style="width: 200px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>@Model.MaDanhMuc</td>
+                <td>@Model.TenDanhMuc</td>
+                <td>@Model.MoTa</td>
+                <td>
+                    <form asp-action="DeleteConfirmed" asp-route-id="@Model.MaDanhMuc" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger me-2">Xóa</button>
+                        <a asp-action="Index" class="btn btn-sm btn-success">Quay lại</a>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

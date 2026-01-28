@@ -1,0 +1,66 @@
+﻿@model List<BookWeb.Data.ChiTietGio>
+
+@{
+    ViewData["Title"] = "Thanh toán đơn hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" asp-action="Checkout" class="w-50">
+    <div class="mb-3">
+        <label class="form-label">Tên người nhận:</label>
+        <input type="text" name="tenNguoiDung" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Điện thoại:</label>
+        <input type="text" name="dienThoai" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input type="email" name="email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Địa chỉ:</label>
+        <input type="text" name="diaChi" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Thành phố:</label>
+        <input type="text" name="thanhPho" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Quốc gia:</label>
+        <input type="text" name="quocGia" class="form-control" />
+    </div>
+    <div>
+        <label class="form-label">Phương thức thanh toán:</label>
+        <input type="radio" id="cod" name="phuongThucThanhToan" value="COD" checked />
+        <label for="cod">Thanh toán khi nhận hàng (COD)</label>
+    </div>
+
+
+    <h3>Danh sách sản phẩm trong giỏ</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaSanPhamNavigation.TenSanPham</td>
+                    <td>@item.Gia.ToString("N0") VND</td>
+                    <td>@item.SoLuong</td>
+                    <td>@($"{item.Gia * item.SoLuong:N0} VND")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="GioHang" asp-action="Index" class="btn btn-primary ms-2">Quay về giỏ hàng</a>
+    <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
+</form>

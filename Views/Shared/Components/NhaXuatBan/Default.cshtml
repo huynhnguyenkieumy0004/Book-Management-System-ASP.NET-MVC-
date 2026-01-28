@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BookWeb.Data.NhaXuatBan>
+
+<div class="brands_products">
+    <div class="brands-name">
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var nxb in Model)
+            {
+                <li>
+                    <a asp-action="List"
+                       asp-controller="NhaXuatBan"
+                       asp-route-MaNhaXuatBan="@nxb.MaNhaXuatBan">
+                        <span class="pull-right"></span>
+                        @nxb.TenNhaXuatBan
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

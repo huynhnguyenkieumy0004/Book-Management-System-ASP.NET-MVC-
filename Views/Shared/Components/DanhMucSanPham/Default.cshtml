@@ -1,0 +1,14 @@
+﻿@model IEnumerable<BookWeb.Data.DanhMucSanPham>
+
+<div class="panel-group category-products" id="accordian">
+    @foreach (var item in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a asp-action="List" asp-controller="DanhMucSanPham" asp-route-MaDanhMuc="@item.MaDanhMuc">@item.TenDanhMuc</a>
+                </h4>
+            </div>
+        </div>
+    }
+</div>
