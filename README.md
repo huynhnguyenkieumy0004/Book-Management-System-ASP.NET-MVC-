@@ -14,4 +14,4 @@ This is an academic project developed as part of my Information Technology studi
 
 ## Demo & Database
 Due to GitHub file size limitations, demo video and full database are available on Google Drive:
-https://drive.google.com/file/d/1UVGVWlsAn291CjRrmSPIx5LnBIl7Oe8R/view?usp=sharing
+https://drive.google.com/drive/folders/1Y4L6DhaJ3moLGBIdktQvyin-xpCl2627?usp=sharing
